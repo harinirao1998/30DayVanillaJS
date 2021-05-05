@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+
+
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+
+  <style>
+    html {
+      background:#F3CFC6;
+      background-size: cover;
+
+      font-family: 'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      margin: 0;
+      font-size: 2rem;
+      display: flex;
+      flex: 1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border: 20px solid lavender;
+      border-radius: 50%;
+      margin: 50px auto;
+      position: relative;
+      padding: 2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px purple,
+        inset 0 0 10px white,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      background: black;
+      position: absolute;
+      top: 50%;
+      
+    }
+
+    .hour-hand{
+        width: 150px;
+        height: 3px;
+        transform:rotate(100deg);
+        transform-origin:100%;
+    }
+
+    .min-hand{
+        width: 150px;
+        height: 1.5px;
+        transform:rotate(30deg);
+        transform-origin:100%;
+        background-color: grey;
+    }
+
+    .second-hand{
+        width:150px;
+        height: 1px;
+        transform:rotate(1 deg);
+        background-color:red;
+        transform-origin:100%;
+    }
+
+  </style>
+
+  <script>
+     
+     function setTime(){
+        const da=new Date();
+        const hour=da.getHours();
+        const mins=da.getMinutes();
+        const secs=da.getSeconds();
+
+        const secondDegree = ((secs / 60) * 360) + 90;
+        document.querySelector('.second-hand').style.transform=`rotate(${secondDegree}deg)`;
+
+       
+        const minDegree = ((mins / 60) * 360) + ((secs/60)*6) + 90;
+        document.querySelector('.min-hand').style.transform = `rotate(${minDegree}deg)`;
+
+        const hourDegree=((hour / 12) * 360) + ((mins/60)*30) + 90;
+        document.querySelector('.hour-hand').style.transform=`rotate(${hourDegree}deg)`;
+    
+     }
+
+     setInterval(setTime,1000)
+     setTime();
+  </script>
+</body>
+</html>
+
+<!--
+What I learned in this module, Date,time,Hours, Date module, tansform property and 
+transform-origin property and template strings dig deep. SetInterval() method. 
+
+
+-->
